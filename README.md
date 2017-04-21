@@ -1,8 +1,6 @@
 # Teachbaser
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/teachbaser`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Teachbase API Client
 
 ## Installation
 
@@ -22,17 +20,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+authorization = Teachbaser.new.operations[:get_access_token].call
+                  client_id: 'your_client_id',
+                  cient_secret: 'your_client_secret
+```
 
-## Development
+```ruby
+client = Teachbaser.new(access_token: authorization.access_token)
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+courses = client.operations[:get_courses].call(page: 1, per_page: 5)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+courses.data.first.class #=> Teachbaser::Course
 
-## Contributing
+course = client.operations[:get_course].call(id: 59)
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/teachbaser.
+You can access with it like with `Struct` object
+
+```ruby
+course.id #=> 59
+
+course.sections.first.class #=> Teachbaser::Section
+```
 
 
 ## License
