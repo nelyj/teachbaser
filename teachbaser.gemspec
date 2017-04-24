@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "teachbaser"
-  spec.version       = '0.0.1'
+  spec.version       = '0.0.3'
   spec.authors       = ["Stanislav Kravchenko"]
   spec.email         = ["stankra@yandex.ru"]
 
@@ -29,8 +29,10 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "dry-types"
   spec.add_runtime_dependency "dry-struct"
-  spec.add_runtime_dependency "evil-struct"
-  spec.add_runtime_dependency "evil-client"
+  spec.add_runtime_dependency "evil-struct", ">= 0.0.4"
+  spec.add_runtime_dependency "evil-client", ">= 0.3.2"
+  spec.add_runtime_dependency "oauth2", ">= 1.3.1"
+  spec.add_runtime_dependency "anyway_config", ">= 0.3"
 
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"

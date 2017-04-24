@@ -2,17 +2,13 @@ require "pry"
 require "evil/client"
 require "dry-types"
 require "dry-struct"
+require "oauth2"
+require "teachbaser/config"
 
 class Teachbaser
   extend Evil::Client::DSL
 
   Types = Module.new { |types| types.include Dry::Types.module }
-
-  class Authorization < Evil::Struct
-    attribute :access_token, Types::Strict::String
-    attribute :token_type,   Types::Strict::String
-    attribute :created_at,   Types::Form::DateTime
-  end
 
   %w(types models operations).each do |folder|
     path = File.expand_path("../teachbaser/#{folder}/*.rb", __FILE__)
@@ -27,8 +23,7 @@ class Teachbaser
   end
 
   base_url do |settings|
-    domain = settings.local ? 'localhost:3001' : 'go.teachbase.ru'
-    "http://#{domain}/endpoint/v#{settings.version}/"
+    "http://go.teachbase.ru/endpoint/v#{settings.version}/"
   end
 
   operation do |settings|
@@ -41,25 +36,16 @@ class Teachbaser
     response :success, 200
   end
 
-  operation :get_access_token do |settings|
-    http_method :post
+  def self.config
+    @config ||= Config.new
+  end
 
-    path do
-      domain = settings.local ? 'localhost:3001' : 'go.teachbase.ru'
-      "http://#{domain}/oauth/token"
-    end
-
-    body format: "json" do
-      attributes do
-        attribute :client_id,     Types::Strict::String
-        attribute :client_secret, Types::Strict::String
-        attribute :grant_type,    Types::Strict::String, default: proc { 'client_credentials' }
-      end
-    end
-
-    response :success, 200, format: :json, model: Authorization
-    response :error, 401, format: :json, raise: true do
-      attribute :error
-    end
+  def self.token
+    client = OAuth2::Client.new(
+      Teachbaser.config.client_id,
+      Teachbaser.config.client_secret,
+      site: Teachbaser.config.auth_url
+    )
+    client.client_credentials.get_token.token
   end
 end

@@ -20,20 +20,18 @@ Or install it yourself as:
 
 ## Usage
 
-```ruby
-authorization = Teachbaser.new.operations[:get_access_token].call
-                  client_id: 'your_client_id',
-                  cient_secret: 'your_client_secret
-```
+Teachbaser uses [anyway_config](https://github.com/palkan/anyway_config) for configuration, so you can provide configuration parameters through env vars, seperate config file (config/teachbaser.yml) or secrets.yml.
+
+Required params: **client_id**, **client_secret**.
 
 ```ruby
-client = Teachbaser.new(access_token: authorization.access_token)
+api_client = Teachbaser.new(access_token: Teachbaser.token)
 
-courses = client.operations[:get_courses].call(page: 1, per_page: 5)
+courses = api_client.operations[:get_courses].call(page: 1, per_page: 5)
 
 courses.data.first.class #=> Teachbaser::Course
 
-course = client.operations[:get_course].call(id: 59)
+course = api_client.operations[:get_course].call(id: 59)
 ```
 
 You can access with it like with `Struct` object
