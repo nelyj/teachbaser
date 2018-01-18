@@ -10,6 +10,7 @@ class Teachbaser
 
   Types = Module.new { |types| types.include Dry::Types.module }
 
+  require 'teachbaser/models/section.rb'
   %w(types models operations).each do |folder|
     path = File.expand_path("../teachbaser/#{folder}/*.rb", __FILE__)
     Dir[path].each { |file| require(file) }
