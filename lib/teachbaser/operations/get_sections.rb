@@ -8,9 +8,9 @@ class Teachbaser
 
     query do
       attributes do
-        attribute :course_id, Types::Coercible::Int
-        attribute :page,      Types::Coercible::Int, optional: true
-        attribute :per_page,  Types::Coercible::Int, optional: true
+        attribute :course_id, Types::Coercible::Integer
+        attribute :page,      Types::Coercible::Integer, optional: true
+        attribute :per_page,  Types::Coercible::Integer, optional: true
       end
     end
 

@@ -1,3 +1,3 @@
 module Teachbaser::Types
-  Version = Coercible::Int.constrained included_in: [1]
+  Version = Coercible::Integer.constrained included_in: [1]
 end

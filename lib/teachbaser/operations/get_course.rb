@@ -7,7 +7,7 @@ class Teachbaser
     path { |id:, **| "courses/#{id}" }
 
     query do
-      attribute :id, Types::Coercible::Int
+      attribute :id, Types::Coercible::Integer
     end
 
     response :success, 200 ,format: :json, model: Course

@@ -19,8 +19,8 @@ class Teachbaser
   settings do
     option :version,       Types::Version, default: proc { 1 }
     option :access_token,  Types::Strict::String, optional: true
-    option :local,         Types::Form::Bool, default: proc { false }
-    option :test,          Types::Form::Bool, default: proc { false }
+    option :local,         Types::Params::Bool, default: proc { false }
+    option :test,          Types::Params::Bool, default: proc { false }
   end
 
   base_url do |settings|
