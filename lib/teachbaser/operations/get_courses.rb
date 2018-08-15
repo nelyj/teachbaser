@@ -1,6 +1,6 @@
 class Teachbaser
   operation :get_courses do
-    documentation 'http://go.teachbase.ru/lurker/endpoint/v1/courses-GET.html'
+    documentation 'https://go.teachbase.ru/lurker/endpoint/v1/courses-GET.html'
 
     http_method :get
 

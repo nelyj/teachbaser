@@ -24,11 +24,11 @@ class Teachbaser
   end
 
   base_url do |settings|
-    "http://go.teachbase.ru/endpoint/v#{settings.version}/"
+    "https://go.teachbase.ru/endpoint/v#{settings.version}/"
   end
 
   operation do |settings|
-    documentation "http://go.teachbase.ru/lurker"
+    documentation "https://go.teachbase.ru/lurker"
 
     security do
       key_auth :access_token, settings.access_token, using: :query
