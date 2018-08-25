@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "dry-types", '0.13.2'
   spec.add_runtime_dependency "dry-struct", '0.5.1'
   spec.add_runtime_dependency "evil-struct", ">= 0.0.4"
-  spec.add_runtime_dependency "evil-client", ">= 0.3.2"
+  spec.add_runtime_dependency "evil-client", "~> 0.3.2"
   spec.add_runtime_dependency "oauth2", ">= 1.3.1"
   spec.add_runtime_dependency "anyway_config", ">= 0.3"
 
